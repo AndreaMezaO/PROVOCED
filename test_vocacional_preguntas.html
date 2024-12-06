@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Vocacional</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #a8c0ff, #bfd4ee); /* Fondo degradado más claro */
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+            flex-direction: column;
+        }
+
+        main {
+            background: rgb(226, 236, 236);
+            width: 100%;
+            max-width: 800px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: 20px; /* Espacio desde la parte superior */
+        }
+
+        header {
+            width: 100%;
+            background-color: #3498db;
+            color: rgb(216, 213, 230);
+            padding: 40px 0;
+            margin-bottom: 30px;
+            text-align: center;
+            border-radius: 10px;
+            font-size: 2.5em;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Sombra para el cuadro */
+            margin-top: -40px; /* Mueve el título un poco hacia arriba */
+        }
+
+        header p {
+            font-size: 1.2em;
+            font-weight: normal;
+        }
+
+        h1 {
+            font-size: 2.5em; /* Tamaño para el título */
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            margin-top: 20px;
+            color: #e74c3c;
+            font-weight: normal;
+            margin-bottom: 20px; /* Espacio debajo del h2 */
+        }
+
+        h3 {
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: left;
+            margin-bottom: 20px; /* Espacio entre las preguntas */
+        }
+
+        .question {
+            width: 100%;
+            margin-bottom: 30px; /* Espacio mayor para las preguntas */
+            text-align: center;
+        }
+
+        .option {
+            margin: 10px 0;
+            font-size: 1.1em;
+            text-align: left;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 12px 25px;
+            background-color: #3498db;
+            color: rgb(162, 186, 202);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            width: 80%;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        #result {
+            display: none;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 30px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Vocacional</h1>
+    <p>Responde las preguntas para descubrir cuál podría ser tu carrera ideal.</p>
+    <p>.</p>
+    <div id="test">
+        <!-- Pregunta 1 -->
+        <div class="question" id="question1">
+            <p>1. ¿Qué actividad prefieres hacer en tu tiempo libre?</p>
+            <div class="option"><input type="radio" name="q1" value="lectura"> Leer libros</div>
+            <div class="option"><input type="radio" name="q1" value="deporte"> Hacer deporte</div>
+            <div class="option"><input type="radio" name="q1" value="peliculas"> Ver películas</div>
+            <div class="option"><input type="radio" name="q1" value="arte"> Pintar o dibujar</div>
+            <div class="option"><input type="radio" name="q1" value="programacion"> Programar</div>
+            <div class="option"><input type="radio" name="q1" value="cocina"> Cocinar</div>
+            <button onclick="nextQuestion(1)">Siguiente</button>
+        </div>
+
+        <!-- Pregunta 2 -->
+        <div class="question" id="question2" style="display: none;">
+            <p>2. ¿Qué materia te gusta más en la escuela?</p>
+            <div class="option"><input type="radio" name="q2" value="matematicas"> Matemáticas</div>
+            <div class="option"><input type="radio" name="q2" value="ciencias"> Ciencias</div>
+            <div class="option"><input type="radio" name="q2" value="literatura"> Literatura</div>
+            <div class="option"><input type="radio" name="q2" value="historia"> Historia</div>
+            <div class="option"><input type="radio" name="q2" value="arte"> Arte</div>
+            <div class="option"><input type="radio" name="q2" value="educacion_fisica"> Educación física</div>
+            <button onclick="nextQuestion(2)">Siguiente</button>
+        </div>
+
+        <!-- Pregunta 3 -->
+        <div class="question" id="question3" style="display: none;">
+            <p>3. ¿Te gustaría trabajar en equipo o de forma independiente?</p>
+            <div class="option"><input type="radio" name="q3" value="equipo"> Trabajar en equipo</div>
+            <div class="option"><input type="radio" name="q3" value="solo"> Trabajar solo</div>
+            <button onclick="nextQuestion(3)">Siguiente</button>
+        </div>
+
+
+        <!-- Pregunta 4 -->
+        <div class="question" id="question4" style="display: none;">
+            <p>4. ¿Prefieres trabajos que involucren contacto con personas o trabajos más técnicos?</p>
+            <div class="option"><input type="radio" name="q4" value="personas"> Contacto con personas</div>
+            <div class="option"><input type="radio" name="q4" value="tecnicos"> Trabajos técnicos</div>
+            <div class="option"><input type="radio" name="q4" value="ambos"> Ambos</div>
+            <button onclick="nextQuestion(4)">Siguiente</button>
+        </div>
+
+        <!-- Pregunta 5 -->
+        <div class="question" id="question5" style="display: none;">
+            <p>5. ¿Te atrae más la ciencia y la tecnología o el arte y la creatividad?</p>
+            <div class="option"><input type="radio" name="q5" value="ciencia"> Ciencia y tecnología</div>
+            <div class="option"><input type="radio" name="q5" value="arte"> Arte y creatividad</div>
+            <div class="option"><input type="radio" name="q5" value="ambos"> Ambos</div>
+            <button onclick="nextQuestion(5)">Siguiente</button>
+        </div>
+
+        <!-- Pregunta 6 -->
+        <div class="question" id="question6" style="display: none;">
+            <p>6. ¿Te gustaría tener un trabajo en el que puedas viajar?</p>
+            <div class="option"><input type="radio" name="q6" value="si"> Sí</div>
+            <div class="option"><input type="radio" name="q6" value="no"> No</div>
+            <div class="option"><input type="radio" name="q6" value="tal_vez"> Tal vez</div>
+            <button onclick="nextQuestion(6)">Siguiente</button>
+        </div>
+
+        <!-- Pregunta 7 -->
+        <div class="question" id="question7" style="display: none;">
+            <p>7. ¿Prefieres trabajar en un entorno de oficina o al aire libre?</p>
+            <div class="option"><input type="radio" name="q7" value="oficina"> Oficina</div>
+            <div class="option"><input type="radio" name="q7" value="aire_libre"> Al aire libre</div>
+            <div class="option"><input type="radio" name="q7" value="ambos"> Ambos</div>
+            <button onclick="nextQuestion(7)">Siguiente</button>
+        </div>
+
+        <!-- Pregunta 8 -->
+        <div class="question" id="question8" style="display: none;">
+            <p>8. ¿Te interesa tener un impacto positivo en la sociedad?</p>
+            <div class="option"><input type="radio" name="q8" value="si"> Sí</div>
+            <div class="option"><input type="radio" name="q8" value="no"> No</div>
+            <div class="option"><input type="radio" name="q8" value="no_seguro"> No estoy seguro</div>
+            <button onclick="nextQuestion(8)">Siguiente</button>
+        </div>
+
+        <!-- Pregunta 9 -->
+        <div class="question" id="question9" style="display: none;">
+            <p>9. ¿Te gustaría tener un trabajo que implique resolver problemas complejos?</p>
+            <div class="option"><input type="radio" name="q9" value="si"> Sí</div>
+            <div class="option"><input type="radio" name="q9" value="no"> No</div>
+            <div class="option"><input type="radio" name="q9" value="depende"> Depende del problema</div>
+            <button onclick="nextQuestion(9)">Siguiente</button>
+        </div>
+
+        <!-- Pregunta 10 -->
+        <div class="question" id="question10" style="display: none;">
+            <p>10. ¿Qué nivel de responsabilidad te gustaría tener en tu trabajo?</p>
+            <div class="option"><input type="radio" name="q10" value="alta"> Alta responsabilidad</div>
+            <div class="option"><input type="radio" name="q10" value="media"> Responsabilidad media</div>
+            <div class="option"><input type="radio" name="q10" value="baja"> Baja responsabilidad</div>
+            <button onclick="showResult()">Finalizar</button>
+        </div>
+    </div>
+
+    <div id="result" style="display: none;"></div>
+</div>
+<script>
+    function nextQuestion(current) {
+        document.getElementById(`question${current}`).style.display = "none";
+        document.getElementById(`question${current + 1}`).style.display = "block";
+    }
+
+    function showResult() {
+    const answers = [];
+    for (let i = 1; i <= 10; i++) { // Asegúrate de ajustar el número de preguntas
+        const answer = document.querySelector(`input[name="q${i}"]:checked`);
+        if (!answer) {
+            alert("Por favor responde todas las preguntas.");
+            return;
+        }
+        answers.push(answer.value);
+    }
+
+    // Lógica mejorada para determinar una carrera específica
+    let career = "";
+
+    // Combina preferencias específicas para determinar carreras
+    if (answers.includes("lectura") && answers.includes("literatura")) {
+        career = "Licenciatura en Literatura o Filosofía";
+    } else if (answers.includes("programacion") && answers.includes("matematicas")) {
+        career = "Ingeniería en Software o Ciencias Computacionales";
+    } else if (answers.includes("arte") && answers.includes("creatividad")) {
+        career = "Diseño Gráfico, Bellas Artes o Publicidad";
+    } else if (answers.includes("deporte") && answers.includes("educacion_fisica")) {
+        career = "Fisioterapia, Entrenamiento Deportivo o Ciencias del Deporte";
+    } else if (answers.includes("cocina")) {
+        career = "Gastronomía, Chef Profesional o Administración de Restaurantes";
+    } else if (answers.includes("ciencia") && answers.includes("tecnicos")) {
+        career = "Ingeniería Mecánica, Robótica o Biotecnología";
+    } else if (answers.includes("historia") && answers.includes("personas")) {
+        career = "Historia, Antropología o Arqueología";
+    } else if (answers.includes("arte") && answers.includes("peliculas")) {
+        career = "Producción Audiovisual, Cine o Dirección de Arte";
+    } else if (answers.includes("matematicas") && answers.includes("resolver_problemas")) {
+        career = "Economía, Finanzas o Actuaría";
+    } else if (answers.includes("aire_libre") && answers.includes("ciencia")) {
+        career = "Biología, Geología o Ciencias Ambientales";
+    } else if (answers.includes("viajar") && answers.includes("arte")) {
+        career = "Fotografía, Turismo o Diseño de Interiores";
+    } else if (answers.includes("responsabilidad") && answers.includes("si")) {
+        career = "Administración de Empresas o Derecho";
+    } else if (answers.includes("viajar") && answers.includes("tecnicos")) {
+        career = "Ingeniería Aeroespacial o Logística Internacional";
+    } else {
+        // Default: Seleccionar la respuesta más frecuente
+        const counts = answers.reduce((acc, val) => {
+            acc[val] = (acc[val] || 0) + 1;
+            return acc;
+        }, {});
+        const mostFrequentAnswer = Object.keys(counts).reduce((a, b) =>
+            counts[a] > counts[b] ? a : b
+        );
+        switch (mostFrequentAnswer) {
+            case "lectura":
+                career = "Humanidades: Literatura, Filosofía o Sociología";
+                break;
+            case "programacion":
+                career = "Carreras en Tecnología: Desarrollo de Software o Ciencias de Datos";
+                break;
+            case "arte":
+                career = "Diseño Gráfico o Artes Visuales";
+                break;
+            case "cocina":
+                career = "Chef Profesional o Gastronomía";
+                break;
+            case "deporte":
+                career = "Educación Física o Ciencias del Deporte";
+                break;
+            case "matematicas":
+                career = "Ingeniería, Economía o Actuaría";
+                break;
+            default:
+                career = "Psicología o una carrera interdisciplinaria.";
+        }
+    }
+
+    // Mostrar resultado
+    document.getElementById("test").style.display = "none";
+    document.getElementById("result").style.display = "block";
+    document.getElementById("result").innerText = `Una posible carrera para ti es: ${career}`;
+}
+</script>
+</body>
+</html>
